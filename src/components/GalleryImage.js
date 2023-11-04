@@ -11,7 +11,9 @@ const GalleryImage = ({
   dragging,
   draggedIndex,
 }) => {
+
   return (
+
     <div
       key={index}
       className={
@@ -25,6 +27,7 @@ const GalleryImage = ({
       onDragStart={() => handleDragStart(image)}
       onDrop={() => handleDrop(index)}
     >
+
       <img
         src={image.thumbnail}
         alt={image.id}
@@ -37,7 +40,9 @@ const GalleryImage = ({
             "opacity-70")
         }
       />
+
       <input
+
         type="checkbox"
         name={image.id}
         id={image.id}
@@ -48,9 +53,11 @@ const GalleryImage = ({
             ? "opacity-100"
             : "opacity-0")
         }
+
         checked={
           selectThumbnails.find((photo) => photo.id === image.id) ? true : false
         }
+
         onChange={() => {
           if (selectThumbnails.find((photo) => photo.id === image.id))
             setSelectThumbnails(
@@ -58,13 +65,17 @@ const GalleryImage = ({
             );
           else setSelectThumbnails([...selectThumbnails, image]);
         }}
+
       />
+
       <DragDropOverlay
         dragging={dragging}
         draggedIndex={draggedIndex}
         image={image}
       />
+
     </div>
+
   );
 };
 
