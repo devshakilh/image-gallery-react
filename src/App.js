@@ -25,6 +25,7 @@ function App() {
     setThumbnails([...thumbnails, ...newImages]);
   };
 
+
   // Handle delete images
   const handleDeleteClick = () => {
     const updatedImages = thumbnails.filter(
@@ -35,17 +36,20 @@ function App() {
     setSelectThumbnails([]);
   };
 
+
   // Handle drag start
   const handleDragStart = (image) => {
     setDragging(true);
     setDraggedImage(image);
   };
 
+
   // Handle drag over
   const handleDragOver = (e) => {
     e.preventDefault();
     e?.target?.children[0]?.alt && setDraggedIndex(e?.target?.children[0]?.alt);
   };
+
 
   // Handle drop image
   const handleDrop = (targetIndex) => {
@@ -62,14 +66,19 @@ function App() {
     }
   };
 
+
   return (
     <main
       className={`min-h-screen w-screen flex flex-row items-center justify-center md:p-0 p-4 `}
     >
       <section className="lg:w-1/2 md:w-3/4 w-full bg-white rounded-lg shadow">
+
         <div className="flex flex-col gap-y-2">
+
           <nav className="py-4 px-6">
+
             <article className="flex flex-row justify-between items-center">
+
               <h1 className="text-2xl font-bold">
                 {selectThumbnails.length === 0 ? (
                   "Gallery"
@@ -78,6 +87,7 @@ function App() {
                     htmlFor="select"
                     className="flex flex-row justify-between items-center gap-x-4"
                   >
+
                     <input
                       type="checkbox"
                       name="select"
@@ -86,20 +96,28 @@ function App() {
                       className="h-5 w-5 accent-blue-500 cursor-pointer"
                       onChange={() => setSelectThumbnails([])}
                     />
+
                     {selectThumbnails.length} Files Selected
                   </label>
+
                 )}
               </h1>
+
               <button
                 className="text-red-500 font-medium"
                 onClick={handleDeleteClick}
               >
                 Delete files
               </button>
+
             </article>
+
           </nav>
+
           <hr />
+
           <section className="h-full w-full p-6">
+
             <div
               className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-1 gap-6"
               onDragOver={handleDragOver}
@@ -133,6 +151,7 @@ function App() {
                       ) && "opacity-70")
                     }
                   />
+
                   <input
                     type="checkbox"
                     name={image.id}
@@ -161,14 +180,18 @@ function App() {
                       else setSelectThumbnails([...selectThumbnails, image]);
                     }}
                   />
+
                   {dragging && Number(draggedIndex) === Number(image.id) && (
                     <div className="absolute top-0 left-0 h-full w-full flex justify-center items-center bg-white border-2 border-dashed rounded-lg">
                       Drop Here
                     </div>
                   )}
                 </div>
+
               ))}
+
               <div className="relative border-2 border-dashed rounded-lg p-4 hover:bg-gray-50 transition-colors ease-linear">
+
                 <input
                   type="file"
                   multiple
@@ -178,6 +201,7 @@ function App() {
                   title="Try to upload photos..."
                   onChange={handleFileChange}
                 />
+
                 <div className="h-full w-full flex flex-col justify-center items-center gap-y-4">
                   <img
                     src="/placeholder.png"
@@ -188,12 +212,19 @@ function App() {
                   />
                   <span className="whitespace-nowrap">Add Images</span>
                 </div>
+
               </div>
+
             </div>
+
           </section>
+
         </div>
+
       </section>
+
     </main>
+
   );
 }
 
