@@ -1,5 +1,3 @@
-
-
 import React, { useState } from "react";
 import GalleryHeader from "./GalleryHeader";
 import GalleryImage from "./GalleryImage";
@@ -7,14 +5,17 @@ import ImageUploader from "./ImageUploader";
 import { Inter } from "next/font/google";
 import images from "@/data/images";
 
+
 const inter = Inter({ subsets: ["latin"] });
 
 const Gallery = () => {
+
   const [selectThumbnails, setSelectThumbnails] = useState([]);
   const [thumbnails, setThumbnails] = useState(images);
   const [dragging, setDragging] = useState(false);
   const [draggedImage, setDraggedImage] = useState(null);
   const [draggedIndex, setDraggedIndex] = useState(null);
+
 
   const handleFileChange = (e) => {
     const selectedFiles = e.target.files;
@@ -29,6 +30,7 @@ const Gallery = () => {
     setThumbnails([...thumbnails, ...newImages]);
   };
 
+
   const handleDeleteClick = () => {
     const updatedImages = thumbnails.filter(
       (image) => !selectThumbnails.some((selected) => selected.id === image.id)
@@ -38,15 +40,18 @@ const Gallery = () => {
     setSelectThumbnails([]);
   };
 
+
   const handleDragStart = (image) => {
     setDragging(true);
     setDraggedImage(image);
   };
 
+
   const handleDragOver = (e) => {
     e.preventDefault();
     e?.target?.children[0]?.alt && setDraggedIndex(e?.target?.children[0]?.alt);
   };
+
 
   const handleDrop = (targetIndex) => {
     setDragging(false);
@@ -63,18 +68,23 @@ const Gallery = () => {
   };
 
   return (
+
     <main
       className={`min-h-screen w-screen flex flex-row items-center justify-center md:p-0 p-4 ${inter.className}`}
     >
       <section className="lg:w-1/2 md:w-3/4 w-full bg-white rounded-lg shadow">
+
         <div className="flex flex-col gap-y-2">
           <GalleryHeader
             selectThumbnails={selectThumbnails}
             setSelectThumbnails={setSelectThumbnails}
             handleDeleteClick={handleDeleteClick}
           />
+
           <hr />
+
           <section className="h-full w-full p-6">
+
             <div
               className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-1 gap-6"
               onDragOver={handleDragOver}
@@ -92,11 +102,17 @@ const Gallery = () => {
                   draggedIndex={draggedIndex}
                 />
               ))}
+
               <ImageUploader handleFileChange={handleFileChange} />
+
             </div>
+
           </section>
+
         </div>
+
       </section>
+
     </main>
   );
 };
